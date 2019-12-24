@@ -1,6 +1,7 @@
 # ubuntu-hadoop
 
->> ├── Dockerfile
+```
+├── Dockerfile
 ├── build-image.sh
 ├── config
 │   ├── core-site.xml
@@ -29,3 +30,4 @@
 │       ├── mapper.py
 │       └── reducer.py
 └── start-container.sh
+```
