@@ -59,3 +59,26 @@ RUN mv /tmp/ssh_config ~/.ssh/config && \
     cp /tmp/slaves $SPARK_HOME/conf/ && \
     mv /tmp/slaves $HADOOP_HOME/etc/hadoop/slaves && \
 ```
+
+```
+sudo docker network create --driver=bridge hadoop
+```
+
+```
+sudo docker run -itd \
+                --net=hadoop \
+                -v /Users/lhuang/ubuntu-hadoop/data:/usr/Downloads:ro \
+                -p 50070:50070 \
+                -p 8088:8088 \
+                --name hadoop-master \
+                --hostname hadoop-master \
+                lhuang9703/ubuntu-hadoop:2.2
+```
+
+```
+sudo docker run -itd \
+                    --net=hadoop \
+                    --name hadoop-slavei \
+                    --hostname hadoop-slavei \
+                    lhuang9703/ubuntu-hadoop:2.2
+```
