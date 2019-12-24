@@ -31,3 +31,31 @@
 │       └── reducer.py
 └── start-container.sh
 ```
+
+```
+RUN apt-get update && apt-get install -y openssh-server openssh-client openjdk-8-jdk wget vim curl net-tools
+```
+
+```
+RUN tar -xzvf hadoop-3.2.1.tar.gz && \
+    mv hadoop-3.2.1 /usr/local/hadoop && \
+    rm hadoop-3.2.1.tar.gz
+```
+
+```
+RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \
+    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+```
+
+```
+COPY config/* /tmp/
+
+RUN mv /tmp/ssh_config ~/.ssh/config && \
+    mv /tmp/hadoop-env.sh /usr/local/hadoop/etc/hadoop/hadoop-env.sh && \
+    mv /tmp/hdfs-site.xml $HADOOP_HOME/etc/hadoop/hdfs-site.xml && \
+    mv /tmp/core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml && \
+    mv /tmp/mapred-site.xml $HADOOP_HOME/etc/hadoop/mapred-site.xml && \
+    mv /tmp/yarn-site.xml $HADOOP_HOME/etc/hadoop/yarn-site.xml && \
+    cp /tmp/slaves $SPARK_HOME/conf/ && \
+    mv /tmp/slaves $HADOOP_HOME/etc/hadoop/slaves && \
+```
