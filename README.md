@@ -82,3 +82,20 @@ sudo docker run -itd \
                     --hostname hadoop-slavei \
                     lhuang9703/ubuntu-hadoop:2.2
 ```
+
+```
+hadoop fs -mkdir -p input
+```
+
+```
+hdfs dfs -put /usr/Downloads/* input
+```
+
+```
+hadoop jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar \
+    -files ./mapper.py, ./reducer.py \
+    -mapper ./mapper.py \
+    -reducer ./reducer.py \
+    -input input/small_data.txt \
+    -output output
+```
